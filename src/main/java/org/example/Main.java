@@ -3,57 +3,56 @@ package org.example;
 
 import java.time.LocalDate;
 
-public class Main {
+    public class Main {
+        public static void main(String[] args) {
+            String[][] array = {
+                    {"1", "2", "3", "4"},
+                    {"5", "6", "7", "8"},
+                    {"9", "10", "11", "12"},
+                    {"13", "14", "15", "16"}
+            };
 
-    public static void main(String[] args) {
-        Dog dog1 = new Dog("Шарик");
-        Cat cat1 = new Cat("Мурка");
-        Cat cat2 = new Cat("Василиса");
+            try {
+                int sum = processArray(array);
+                System.out.println("Сумма элементов массива: " + sum);
+            } catch (MyArraySizeException e) {
+                System.out.println("Ошибка размера массива: " + e.getMessage());
+            } catch (MyArrayDataException e) {
+                System.out.println("Ошибка данных массива: " + e.getMessage());
+            }
 
-        dog1.run(400);
-        dog1.swim(5);
-
-        cat1.run(150);
-        cat1.swim(1); // Кот не умеет плавать
-
-        FoodBowl bowl = new FoodBowl(2); // Изначально 2 порции еды
-
-        Cat[] cats = {cat1, cat2};
-
-        for (Cat cat : cats) {
-            cat.eat(bowl);
+            // Генерация ArrayIndexOutOfBoundsException
+            try {
+                int[] numbers = {1, 2, 3};
+                System.out.println(numbers[5]); // Попытка доступа к несуществующему элементу
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Ошибка: " + e.getMessage());
+            }
         }
 
-        for (Cat cat : cats) {
-            System.out.println(cat.name + " сытость: " + cat.isFull());
-        }
+        public static int processArray(String[][] array) throws MyArraySizeException, MyArrayDataException {
+            // Проверка размера массива
+            if (array.length != 4 || array[0].length != 4) {
+                throw new MyArraySizeException("Размер массива должен быть 4x4.");
+            }
 
-        System.out.println("Общее количество животных: " + Animal.getAnimalCount());
+            int sum = 0;
+
+            // Проход по элементам массива
+            for (int i = 0; i < array.length; i++) {
+                for (int j = 0; j < array[i].length; j++) {
+                    try {
+                        sum += Integer.parseInt(array[i][j]);
+                    } catch (NumberFormatException e) {
+                        throw new MyArrayDataException("Неверные данные в ячейке [" + i + "][" + j + "]: " + array[i][j]);
+                    }
+                }
+            }
+
+            return sum;
+        }
     }
 
-
-    //Класс для тестирования фигур
-    /*public class Main {
-        public static void main(String[] args) {
-            Shape circle = new Circle(5, "Red", "Black");
-            Shape rectangle = new Rectangle(4, 6, "Green", "Blue");
-            Shape triangle = new Triangle(3, 4, 5, "Yellow", "Purple");
-
-            printShapeDetails(circle);
-            printShapeDetails(rectangle);
-            printShapeDetails(triangle);
-        }
-
-        private static void printShapeDetails(Shape shape) {
-            System.out.println("Фигура: " + shape.getClass().getSimpleName());
-            System.out.println("Периметр: " + shape.calculatePerimeter());
-            System.out.println("Площадь: " + shape.calculateArea());
-            System.out.println("Цвет заливки: " + shape.getFillColor());
-            System.out.println("Цвет границы: " + shape.getBorderColor());
-            System.out.println();
-        }
-    }*/
-}
 
 
 
