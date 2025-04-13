@@ -36,3 +36,14 @@ build/
 
 ### Mac OS ###
 .DS_Store
+src/main/java/org/example/Animal.java
+src/main/java/org/example/Animal.java
+src/main/java/org/example/Cat.java
+src/main/java/org/example/Animal.java
+src/main/java/org/example/Cat.java
+src/main/java/org/example/Circle.java
+src/main/java/org/example/Dog.java
+src/main/java/org/example/FoodBowl.java
+src/main/java/org/example/Rectangle.java
+src/main/java/org/example/Shape.java
+src/main/java/org/example/Triangle.java
